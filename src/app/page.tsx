@@ -11,6 +11,12 @@ import SearchResults from './components/SearchResults';
 import { Message as MessageType, ThinkingStep, SearchResult } from './types';
 import api from './api/perplexity';
 import Image from 'next/image';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export default function Home() {
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -18,6 +24,55 @@ export default function Home() {
   const [thinkingSteps, setThinkingSteps] = useState<ThinkingStep[]>([]);
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Load chat history on component mount
+  useEffect(() => {
+    loadChatHistory();
+  }, []);
+
+  const loadChatHistory = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('chat_history')
+        .select('*')
+        .order('timestamp', { ascending: true });
+      
+      if (error) throw error;
+      
+      if (data) {
+        setMessages(data.map((msg: { 
+          id: string; 
+          role: 'user' | 'assistant'; 
+          content: string; 
+          timestamp: string; 
+        }) => ({
+          id: msg.id,
+          role: msg.role,
+          content: msg.content,
+          timestamp: new Date(msg.timestamp)
+        })));
+      }
+    } catch (error) {
+      console.error('Error loading chat history:', error);
+    }
+  };
+
+  const saveChatMessage = async (message: MessageType) => {
+    try {
+      const { error } = await supabase
+        .from('chat_history')
+        .insert({
+          id: message.id,
+          role: message.role,
+          content: message.content,
+          timestamp: message.timestamp.toISOString()
+        });
+      
+      if (error) throw error;
+    } catch (error) {
+      console.error('Error saving chat message:', error);
+    }
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -92,7 +147,6 @@ export default function Home() {
   const handleSubmit = async (input: string) => {
     if (!input.trim()) return;
 
-    // Add user message
     const userMessage: MessageType = {
       id: uuidv4(),
       role: 'user',
@@ -101,18 +155,15 @@ export default function Home() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    await saveChatMessage(userMessage);
     setIsLoading(true);
     setThinkingSteps([]);
     setSearchResults([]);
 
     try {
-      // Simulate thinking process - this should be visible to the user
       await simulateThinking(input);
-
-      // Get response from API
       const response = await api.search(input);
 
-      // Add AI message
       const aiMessage: MessageType = {
         id: uuidv4(),
         role: 'assistant',
@@ -121,9 +172,9 @@ export default function Home() {
       };
 
       setMessages((prev) => [...prev, aiMessage]);
+      await saveChatMessage(aiMessage);
       setSearchResults(response.searchResults);
     } catch (error) {
-      // Add error message
       const errorMessage: MessageType = {
         id: uuidv4(),
         role: 'assistant',
@@ -132,6 +183,7 @@ export default function Home() {
       };
 
       setMessages((prev) => [...prev, errorMessage]);
+      await saveChatMessage(errorMessage);
       console.error('Error processing query:', error);
     } finally {
       setIsLoading(false);
@@ -205,7 +257,7 @@ export default function Home() {
                   </p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 w-full max-w-2xl mx-auto">
-                    {featuredQuestions.map((suggestion) => (
+                    {featuredQuestions.map(suggestion => (
                       <button
                         key={suggestion.text}
                         onClick={() => handleSubmit(suggestion.text)}
@@ -222,13 +274,13 @@ export default function Home() {
               </div>
             ) : (
               <div className="pt-4">
-                {messages.map((message, index) => (
+                {messages.map((message) => (
                   <div key={message.id}>
                     <Message message={message} />
-                    {message.role === 'user' && index === messages.length - 1 && isLoading && (
+                    {message.role === 'user' && messages[messages.length - 1].id === message.id && isLoading && (
                       <ThinkingProcess steps={thinkingSteps} isComplete={false} />
                     )}
-                    {message.role === 'assistant' && index === messages.length - 1 && (
+                    {message.role === 'assistant' && messages[messages.length - 1].id === message.id && (
                       <SearchResults results={searchResults} />
                     )}
                   </div>
