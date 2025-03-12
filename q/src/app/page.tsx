@@ -3,13 +3,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Brain, Star, Zap, Cpu } from 'lucide-react';
-import Header from './components/Header';
-import ChatInput from './components/ChatInput';
-import Message from './components/Message';
-import ThinkingProcess from './components/ThinkingProcess';
+import Header from '@/app/components/Header';
+import ChatInput from '@/app/components/ChatInput';
+import Message from '@/app/components/Message';
+import ThinkingProcess from '@/app/components/ThinkingProcess';
 import SearchResults from '@/app/components/SearchResults';
-import { Message as MessageType, ThinkingStep, SearchResult } from './types';
-import api from './api/perplexity';
+import { Message as MessageType, ThinkingStep, SearchResult } from '@/app/types';
+import api from '@/app/api/perplexity';
 import Image from 'next/image';
 import { createClient } from '@supabase/supabase-js';
 
