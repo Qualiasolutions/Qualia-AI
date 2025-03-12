@@ -13,10 +13,21 @@ import api from '@/app/api/perplexity';
 import Image from 'next/image';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// Initialize Supabase client with error handling
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+let supabase: ReturnType<typeof createClient> | null = null;
+
+try {
+  if (supabaseUrl && supabaseAnonKey) {
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+  } else {
+    console.warn('Supabase credentials not found. Chat history will not be persisted.');
+  }
+} catch (error) {
+  console.error('Failed to initialize Supabase client:', error);
+}
 
 export default function Home() {
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -27,10 +38,14 @@ export default function Home() {
 
   // Load chat history on component mount
   useEffect(() => {
-    loadChatHistory();
+    if (supabase) {
+      loadChatHistory();
+    }
   }, []);
 
   const loadChatHistory = async () => {
+    if (!supabase) return;
+
     try {
       const { data, error } = await supabase
         .from('chat_history')
@@ -58,6 +73,8 @@ export default function Home() {
   };
 
   const saveChatMessage = async (message: MessageType) => {
+    if (!supabase) return;
+
     try {
       const { error } = await supabase
         .from('chat_history')
