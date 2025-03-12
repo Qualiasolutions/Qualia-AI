@@ -201,11 +201,11 @@ export default function Home() {
                   </h1>
                   
                   <p className="text-gray-400 text-lg mb-12 max-w-xl mx-auto">
-                    I'm your Qualia AI Assistant. How can I help you today?
+                    I&apos;m your Qualia AI Assistant. How can I help you today?
                   </p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 w-full max-w-2xl mx-auto">
-                    {featuredQuestions.map((suggestion, index) => (
+                    {featuredQuestions.map((suggestion) => (
                       <button
                         key={suggestion.text}
                         onClick={() => handleSubmit(suggestion.text)}
