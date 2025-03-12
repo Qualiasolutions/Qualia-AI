@@ -60,7 +60,7 @@ export default function Header({ toggleSidebar }: HeaderProps) {
             >
               <Image 
                 src="/images/tzironis-logo.png"
-                alt="Tzironis Logo"
+                alt="Qualia Logo"
                 width={24}
                 height={24}
                 priority
@@ -71,14 +71,14 @@ export default function Header({ toggleSidebar }: HeaderProps) {
                     target.style.display = 'none';
                     const parent = target.parentElement;
                     if (parent) {
-                      parent.textContent = 'TZ';
+                      parent.textContent = 'Q';
                     }
                   }
                 }}
               />
             </motion.div>
           </div>
-          <h1 className="text-xl font-semibold text-white gradient-text">Tzironis Business Suite</h1>
+          <h1 className="text-xl font-semibold text-white gradient-text">Qualia AI Assistant</h1>
         </div>
         
         <div className="mt-6 px-2">

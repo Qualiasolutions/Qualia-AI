@@ -32,24 +32,24 @@ const generateMockThinking = (query: string): ThinkingStep[] => {
 const generateMockSearchResults = (query: string): SearchResult[] => {
   return [
     {
-      title: "Tzironis Business Products Catalog",
-      url: "https://tzironis.com/products",
-      snippet: `Browse our comprehensive catalog of business solutions related to ${query}. Find the right tools to optimize your business operations.`
+      title: "Qualia AI Product Catalog",
+      url: "https://qualia.solutions/products",
+      snippet: `Browse our comprehensive catalog of AI solutions related to ${query}. Find the right tools to optimize your business operations.`
     },
     {
-      title: "Tzironis Business Suite Documentation",
-      url: "https://tzironis.com/docs",
-      snippet: `Official documentation and guides for implementing ${query} in your business workflow using Tzironis Business Suite.`
+      title: "Qualia AI Assistant Documentation",
+      url: "https://qualia.solutions/docs",
+      snippet: `Official documentation and guides for implementing ${query} in your business workflow using Qualia AI Assistant.`
     },
     {
-      title: "Business Case Studies - Tzironis Solutions",
-      url: "https://tzironis.com/case-studies",
-      snippet: `Real-world examples of how businesses improved their ${query} processes with Tzironis Business Suite.`
+      title: "Business Case Studies - Qualia Solutions",
+      url: "https://qualia.solutions/case-studies",
+      snippet: `Real-world examples of how businesses improved their ${query} processes with Qualia AI Assistant.`
     },
     {
-      title: "Tzironis Business Blog - Latest Insights",
-      url: "https://tzironis.com/blog",
-      snippet: `Expert articles and analysis on ${query} and other business optimization strategies.`
+      title: "Qualia AI Blog - Latest Insights",
+      url: "https://qualia.solutions/blog",
+      snippet: `Expert articles and analysis on ${query} and other AI optimization strategies.`
     }
   ];
 };
@@ -80,7 +80,7 @@ const api = {
           messages: [
             {
               role: "system",
-              content: "You are Qualia Solutions, a helpful and intelligent AI assistant. Provide accurate, concise, and clear responses. Your answers should be well-structured, factual, and directly address the user's query."
+              content: "You are Qualia AI Assistant, a helpful and intelligent AI assistant. Provide accurate, concise, and clear responses. Your answers should be well-structured, factual, and directly address the user's query."
             },
             {
               role: "user",
@@ -138,7 +138,7 @@ const api = {
             messages: [
               {
                 role: "system",
-                content: "You are Qualia Solutions, a helpful and intelligent AI assistant. Provide accurate, concise, and clear responses. Your answers should be well-structured, factual, and directly address the user's query."
+                content: "You are Qualia AI Assistant, a helpful and intelligent AI assistant. Provide accurate, concise, and clear responses. Your answers should be well-structured, factual, and directly address the user's query."
               },
               {
                 role: "user",

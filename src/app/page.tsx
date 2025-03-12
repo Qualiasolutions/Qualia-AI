@@ -177,7 +177,7 @@ export default function Home() {
                     <div className="w-24 h-24 rounded-2xl bg-black flex items-center justify-center text-white font-bold text-4xl shadow-glow mx-auto mb-4 overflow-hidden">
                       <Image 
                         src="/images/Untitled+design+-+2025-01-19T070746.544.png"
-                        alt="Tzironis Logo"
+                        alt="Qualia Logo"
                         width={64}
                         height={64}
                         priority
@@ -188,7 +188,7 @@ export default function Home() {
                             target.style.display = 'none';
                             const parent = target.parentElement;
                             if (parent) {
-                              parent.textContent = 'TZ';
+                              parent.textContent = 'Q';
                             }
                           }
                         }}
@@ -198,11 +198,11 @@ export default function Home() {
                   </div>
                   
                   <h1 className="text-5xl font-bold gradient-text mb-4">
-                    Γεια σου Tzironis!
+                    Welcome to Qualia!
                   </h1>
                   
                   <p className="text-gray-400 text-lg mb-12 max-w-xl mx-auto">
-                    Είμαι η Tzironis Business Suite. Τι θα ήθελες να αναζητήσουμε σήμερα;
+                    I'm your Qualia AI Assistant. How can I help you today?
                   </p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 w-full max-w-2xl mx-auto">
