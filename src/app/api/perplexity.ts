@@ -117,37 +117,30 @@ const api = {
         thinking: generateMockThinking(query),
         searchResults: searchResults,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error querying Perplexity API:', error);
       
       let errorMessage = 'An unknown error occurred';
+      
+      interface AxiosErrorResponse {
+        status: number;
+        statusText: string;
+        data: unknown;
+      }
+
       if (axios.isAxiosError(error) && error.response) {
+        const response = error.response as AxiosErrorResponse;
         // Log more detailed error information
         console.error('API Error Response:', {
-          status: error.response.status,
-          statusText: error.response.statusText,
-          data: error.response.data
+          status: response.status,
+          statusText: response.statusText,
+          data: response.data
         });
         
         // Handle different error status codes
-        const status = error.response.status;
+        const status = response.status;
         if (status === 400) {
           errorMessage = 'Bad request: The API request format is incorrect.';
-          console.error('Request payload that caused 400:', JSON.stringify({
-            model: "sonar-pro", 
-            messages: [
-              {
-                role: "system",
-                content: "You are Qualia AI Assistant, a helpful and intelligent AI assistant. Provide accurate, concise, and clear responses. Your answers should be well-structured, factual, and directly address the user's query."
-              },
-              {
-                role: "user",
-                content: query
-              }
-            ],
-            temperature: 0.7,
-            max_tokens: 2000
-          }));
         } else if (status === 401) {
           errorMessage = 'Invalid API key. Please check your Perplexity API key.';
         } else if (status === 429) {
@@ -155,8 +148,8 @@ const api = {
         } else if (status >= 500) {
           errorMessage = 'Perplexity API server error. Please try again later.';
         }
-      } else if (error.request) {
-        errorMessage = 'No response received from Perplexity API. Please check your internet connection.';
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
       }
       
       // Always fall back to mock data

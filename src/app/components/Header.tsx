@@ -1,13 +1,9 @@
-import { Menu, Moon, Sun, Home, Search, Globe, Library, FolderClosed, Download, Settings, User, BookOpen, Terminal, Brain } from 'lucide-react';
+import { Moon, Sun, Home, Search, Globe, Library, FolderClosed, Download, Settings, User, BookOpen, Terminal, Brain } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-interface HeaderProps {
-  toggleSidebar?: () => void;
-}
-
-export default function Header({ toggleSidebar }: HeaderProps) {
+export default function Header() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [activeItem, setActiveItem] = useState<string>('home');
   

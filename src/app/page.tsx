@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 import { Brain, Star, Zap, Cpu } from 'lucide-react';
 import Header from './components/Header';
