@@ -1,108 +1,84 @@
-# Qualia Solutions
+# Qualia AI Assistant
 
-A modern AI assistant powered by the Perplexity API using the sonar-pro model.
+A modern AI-powered assistant built with Next.js, TypeScript, and Tailwind CSS.
 
-## Setup Instructions
+## Tech Stack
 
-1. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Perplexity API
 
-2. **Configure API Key**
-   Create a `.env.local` file in the root directory with your Perplexity API key:
-   ```
-   NEXT_PUBLIC_PERPLEXITY_API_KEY=your_api_key_here
-   ```
+## Getting Started
 
-3. **Running the Development Server**
-   
-   **Windows PowerShell:**
-   ```
-   .\run-dev.ps1
-   ```
-   
-   **Windows Command Prompt:**
-   ```
-   start-dev.bat
-   ```
-   
-   **Manual Start:**
-   ```
-   npm run dev
-   ```
+```bash
+# Install dependencies
+npm install
 
-4. **Access the Application**
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+# Run development server
+npm run dev
 
-## Perplexity API Integration
+# Build for production
+npm run build
 
-This application uses the Perplexity AI `sonar-pro` model, which provides high-quality responses with a 200K token context length. The integration:
+# Start production server
+npm start
+```
 
-- Uses the Chat Completions API endpoint
-- Implements proper error handling for API responses
-- Falls back to mock data when API calls fail
-- Maintains a conversational UI for seamless interaction
+## Environment Variables
 
-## Customization
+Create a `.env.local` file in the root directory with:
 
-- Modify the `sonar-pro` system prompt in `src/app/api/perplexity.ts`
-- Adjust temperature and token settings in the API request
-- Customize UI components in the `src/app/components` directory
-
-## Troubleshooting
-
-If you encounter issues with the Perplexity API:
-
-1. Verify your API key in `.env.local`
-2. Check console logs for detailed error messages
-3. Ensure your API request format follows Perplexity's documentation
-4. Verify your account has access to the `sonar-pro` model
-
-## Resources
-
-- Example files for Perplexity API usage are in the `public` directory:
-  - `daily_knowledge_bot.py/ipynb`
-  - `disease_qa_tutorial.py/ipynb`
+```env
+NEXT_PUBLIC_PERPLEXITY_API_KEY=your_api_key_here
+```
 
 ## Features
 
-- Modern, sleek UI with smooth animations
-- Real-time "thinking" visualization
-- Web search integration
-- Code syntax highlighting
-- Dark mode interface
-- Responsive design
+- 🤖 AI-powered conversations
+- 🔍 Semantic search capabilities
+- 💫 Smooth animations with Framer Motion
+- 🎨 Modern UI with Tailwind CSS
+- 📱 Fully responsive design
+- 🌙 Dark mode support
 
-## Technologies
+## Development
 
-- Next.js 15
-- React 19
-- TypeScript
-- Tailwind CSS
-- Framer Motion for animations
-- Markdown rendering with syntax highlighting
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Create `.env.local` with required environment variables
+4. Run `npm run dev` to start development server
+
+## Deployment
+
+This project is configured for deployment on Vercel:
+
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in Vercel dashboard
+3. Deploy with `git push` to main branch
 
 ## Project Structure
 
-- `src/app/` - Main application code
-  - `components/` - React components
-  - `api/` - API integration
-  - `types.ts` - TypeScript type definitions
-  - `globals.css` - Global styles
-  - `page.tsx` - Main page component
+```
+src/
+├── app/
+│   ├── api/           # API routes
+│   ├── components/    # React components
+│   ├── styles/        # Global styles
+│   └── types/         # TypeScript types
+├── public/            # Static assets
+└── tests/            # Test files
+```
 
-## Customization
+## Contributing
 
-You can customize the appearance by modifying:
-
-- `tailwind.config.ts` - Theme colors and extensions
-- `src/app/globals.css` - Global CSS styles
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
-
----
-
-Built with ❤️ using Perplexity API
+MIT License - See LICENSE file for details
