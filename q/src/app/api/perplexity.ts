@@ -1,3 +1,5 @@
+import { SearchResult } from '../types';
+
 const generateMockSearchResults = (query: string): SearchResult[] => {
   // Return business-relevant resources regardless of the query
   return [
@@ -17,4 +19,20 @@ const generateMockSearchResults = (query: string): SearchResult[] => {
       snippet: `Commercial-grade paper products including toilet paper, paper towels, napkins, and specialized paper products for businesses.`
     },
   ];
-}; 
+};
+
+// Mock API response
+const mockResponse = {
+  answer: "Here's information about our business products and solutions...",
+  searchResults: generateMockSearchResults("")
+};
+
+const api = {
+  search: async (query: string) => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    return mockResponse;
+  }
+};
+
+export default api; 
