@@ -7,7 +7,7 @@ import Header from './components/Header';
 import ChatInput from './components/ChatInput';
 import Message from './components/Message';
 import ThinkingProcess from './components/ThinkingProcess';
-import SearchResults from './components/SearchResults';
+import SearchResults from '@/app/components/SearchResults';
 import { Message as MessageType, ThinkingStep, SearchResult } from './types';
 import api from './api/perplexity';
 import Image from 'next/image';
