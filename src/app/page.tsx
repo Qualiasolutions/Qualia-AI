@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 import { Brain, Star, Zap, Cpu } from 'lucide-react';
 import Header from './components/Header';
@@ -43,7 +42,7 @@ export default function Home() {
     
     // Initial thinking step
     addThinkingStep({
-      content: `Αναλύω την ερώτησή σου: "${query}"`,
+      content: `Analyzing your query: "${query}"`,
       type: 'thinking',
     });
 
@@ -51,7 +50,7 @@ export default function Home() {
 
     // Processing step
     addThinkingStep({
-      content: `Επεξεργάζομαι τις πληροφορίες σχετικά με "${query}"`,
+      content: `Processing information about "${query}"`,
       type: 'thinking',
     });
 
@@ -59,7 +58,7 @@ export default function Home() {
 
     // Search step
     addThinkingStep({
-      content: `Αναζητώ στο διαδίκτυο για σχετικές πληροφορίες σχετικά με "${query}"`,
+      content: `Searching the web for relevant information about "${query}"`,
       type: 'search',
     });
 
@@ -67,7 +66,7 @@ export default function Home() {
 
     // Analyzing results
     addThinkingStep({
-      content: 'Αναλύω τα αποτελέσματα της αναζήτησης',
+      content: 'Analyzing search results',
       type: 'thinking',
     });
 
@@ -75,7 +74,7 @@ export default function Home() {
 
     // Found sources
     addThinkingStep({
-      content: 'Βρήκα αρκετές αξιόπιστες πηγές με πληροφορίες',
+      content: 'Found several reliable sources with information',
       type: 'result',
     });
 
@@ -83,7 +82,7 @@ export default function Home() {
     
     // Formulating response
     addThinkingStep({
-      content: 'Συνθέτω την απάντησή μου με βάση τις πληροφορίες που συγκέντρωσα',
+      content: 'Formulating my response based on the gathered information',
       type: 'thinking',
     });
 
@@ -128,7 +127,7 @@ export default function Home() {
       const errorMessage: MessageType = {
         id: uuidv4(),
         role: 'assistant',
-        content: 'Συγγνώμη, αντιμετώπισα ένα σφάλμα κατά την επεξεργασία του αιτήματός σας. Παρακαλώ δοκιμάστε ξανά.',
+        content: 'Sorry, I encountered an error while processing your request. Please try again.',
         timestamp: new Date(),
       };
 
@@ -142,22 +141,22 @@ export default function Home() {
   // Featured questions with icons
   const featuredQuestions = [
     {
-      text: "Βρες μου πληροφορίες για προϊόντα στο tzironis.gr και πες μου τι προσφέρουν",
+      text: "Tell me about AI-powered solutions for business automation",
       icon: Star,
       color: "from-blue-500 to-cyan-600"
     },
     {
-      text: "Ποια είναι τα καλύτερα προϊόντα καθαρισμού και χαρτικά για επαγγελματική χρήση;",
+      text: "What are the best practices for implementing AI in business workflows?",
       icon: Zap,
       color: "from-amber-500 to-orange-600"
     },
     {
-      text: "Σύγκρινε τις τιμές των απορρυπαντικών μεταξύ διαφορετικών προμηθευτών στην Ελλάδα",
+      text: "Compare different AI models for natural language processing",
       icon: Brain,
       color: "from-emerald-500 to-teal-600"
     },
     {
-      text: "Προτείνε μου οικολογικά προϊόντα καθαρισμού που είναι διαθέσιμα στην ελληνική αγορά",
+      text: "Suggest AI tools for improving business productivity",
       icon: Cpu,
       color: "from-indigo-500 to-purple-600"
     }
